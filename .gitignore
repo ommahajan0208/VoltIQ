@@ -1,0 +1,29 @@
+backend/.venv/
+.venv/
+venv/
+__pycache__/
+*.pyc
+node_modules/
+dist/
+build/
+.next/
+.env
+.env.*
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Node.js
+node_modules/
+.next/
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
