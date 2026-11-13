@@ -1,0 +1,10 @@
+{
+  "run_id": "run_7423ba8306cd9d3de16e138379aeb4e0",
+  "evaluation_kind": "exploratory_preview",
+  "validation_quantile": 0.98,
+  "threshold_kw": 0.019620938769039364,
+  "validation_count": 480,
+  "eligible_test_bins": 384,
+  "candidate_bin_count": 10,
+  "source_threshold_kw": 0.019620938769047802
+}

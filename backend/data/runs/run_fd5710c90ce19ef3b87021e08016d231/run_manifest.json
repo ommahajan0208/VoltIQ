@@ -1,0 +1,28 @@
+{
+  "run_id": "run_fd5710c90ce19ef3b87021e08016d231",
+  "model_id": "persistence",
+  "evaluation_kind": "held_out",
+  "dataset_id": "ds_470ea9ac6f4c4a018e7699f1c8acfadc",
+  "dataset_hash": "4259c9d7ece5dbee9ab8d53682baac68d791c864f0f64a52b4043cb3b90894b7",
+  "model_revision": "observed-last-v1",
+  "pretraining_overlap": "not_applicable",
+  "device": "cpu",
+  "dtype": "float32",
+  "imputed_context_bins": 427,
+  "skip_reasons": {
+    "missing_target": 13,
+    "unresolved_context": 577,
+    "outside_split": 2
+  },
+  "forecast_rows": 13352,
+  "score_rows": 9858,
+  "invalid_model_output_count": 0,
+  "event_rows": 30,
+  "anomaly_status": "calibrated",
+  "split_manifest": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_fd5710c90ce19ef3b87021e08016d231\\split_manifest.json",
+  "metrics_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_fd5710c90ce19ef3b87021e08016d231\\metrics.json",
+  "thresholds_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_fd5710c90ce19ef3b87021e08016d231\\thresholds.json",
+  "forecasts_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_fd5710c90ce19ef3b87021e08016d231\\forecasts.parquet",
+  "scores_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_fd5710c90ce19ef3b87021e08016d231\\scores.parquet",
+  "events_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_fd5710c90ce19ef3b87021e08016d231\\events.parquet"
+}

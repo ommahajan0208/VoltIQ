@@ -1,0 +1,6 @@
+{
+  "repository": "amazon/chronos-bolt-tiny",
+  "revision": "a0e552de83495b5c28c14c71c374f3e33280b340",
+  "weight_sha256": "75068728d376d2bec670379eeef4bfb4d24c0cfe24d957451f8d19b447030a32",
+  "format": "safetensors"
+}

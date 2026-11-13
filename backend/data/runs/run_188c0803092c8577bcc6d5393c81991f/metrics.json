@@ -1,0 +1,123 @@
+{
+  "validation_h1": {
+    "eligible_origins": 2053,
+    "target_bins": 2053,
+    "mae_kw": 0.3311734191358854,
+    "rmse_kw": 0.5737467450536887,
+    "mase": 0.3281508535081823,
+    "energy_error_kwh": -55.747070463160675,
+    "pinball": {
+      "q10": 0.0624588534126926,
+      "q50": 0.1655867095679427,
+      "q90": 0.11799109132992096
+    },
+    "q10_q90_coverage": 0.8368241597661958,
+    "mean_band_width_kw": 1.1740138576748427
+  },
+  "validation_h4": {
+    "eligible_origins": 510,
+    "target_bins": 2040,
+    "mae_kw": 0.4611766411732926,
+    "rmse_kw": 0.7433054691914865,
+    "mase": 0.4569675574021763,
+    "energy_error_kwh": -75.18028245875439,
+    "pinball": {
+      "q10": 0.07770148333649074,
+      "q50": 0.2305883205866463,
+      "q90": 0.1592271774289631
+    },
+    "q10_q90_coverage": 0.778921568627451,
+    "mean_band_width_kw": 1.3866409214250013
+  },
+  "validation_h16": {
+    "eligible_origins": 126,
+    "target_bins": 2016,
+    "mae_kw": 0.5402580199561501,
+    "rmse_kw": 0.827377990775944,
+    "mase": 0.5353271733759167,
+    "energy_error_kwh": -100.97546008229654,
+    "pinball": {
+      "q10": 0.08038173040040113,
+      "q50": 0.27012900997807504,
+      "q90": 0.18065710539693552
+    },
+    "q10_q90_coverage": 0.7867063492063492,
+    "mean_band_width_kw": 1.654510122354305
+  },
+  "test_h1": {
+    "eligible_origins": 2429,
+    "target_bins": 2429,
+    "mae_kw": 0.31739915699859994,
+    "rmse_kw": 0.5614857631997343,
+    "mase": 0.3145023068084213,
+    "energy_error_kwh": -66.25079467933179,
+    "pinball": {
+      "q10": 0.06206496739557451,
+      "q50": 0.15869957849929997,
+      "q90": 0.11423358022740204
+    },
+    "q10_q90_coverage": 0.8307945656648826,
+    "mean_band_width_kw": 1.1363021372988078
+  },
+  "test_h4": {
+    "eligible_origins": 605,
+    "target_bins": 2420,
+    "mae_kw": 0.4376115167904491,
+    "rmse_kw": 0.7210274511610819,
+    "mase": 0.4336175080551191,
+    "energy_error_kwh": -91.01515259239277,
+    "pinball": {
+      "q10": 0.07432375231369995,
+      "q50": 0.21880575839522454,
+      "q90": 0.14949841503351646
+    },
+    "q10_q90_coverage": 0.7966942148760331,
+    "mean_band_width_kw": 1.3519220386531727
+  },
+  "test_h16": {
+    "eligible_origins": 149,
+    "target_bins": 2384,
+    "mae_kw": 0.544699169662008,
+    "rmse_kw": 0.8346427995376619,
+    "mase": 0.5397277894348309,
+    "energy_error_kwh": -131.044336877048,
+    "pinball": {
+      "q10": 0.07863037074373606,
+      "q50": 0.272349584831004,
+      "q90": 0.1862776077651704
+    },
+    "q10_q90_coverage": 0.787751677852349,
+    "mean_band_width_kw": 1.6515650913844373
+  },
+  "timing": {
+    "device": "cpu",
+    "dtype": "float32",
+    "context_bins": 192,
+    "batch_size": 1,
+    "median_ms": 9.439649991691113,
+    "p95_ms": 14.649255007680038
+  },
+  "mase_training_pairs": 11630,
+  "invalid_model_outputs": [
+    {
+      "origin": "2007-05-10T06:15:00",
+      "horizon": 1,
+      "reason": "Forecast quantiles cross"
+    },
+    {
+      "origin": "2007-05-11T00:15:00",
+      "horizon": 1,
+      "reason": "Forecast quantiles cross"
+    },
+    {
+      "origin": "2007-05-10T06:15:00",
+      "horizon": 4,
+      "reason": "Forecast quantiles cross"
+    },
+    {
+      "origin": "2007-05-11T00:15:00",
+      "horizon": 4,
+      "reason": "Forecast quantiles cross"
+    }
+  ]
+}

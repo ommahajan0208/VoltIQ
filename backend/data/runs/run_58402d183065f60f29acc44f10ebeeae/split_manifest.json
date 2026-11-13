@@ -1,0 +1,18 @@
+{
+  "train": {
+    "start": "2006-12-16T17:15:00",
+    "end": "2007-04-18T00:00:00",
+    "calendar_days": 122.28125
+  },
+  "validation": {
+    "start": "2007-04-18T00:00:00",
+    "end": "2007-05-14T00:00:00",
+    "calendar_days": 26.0
+  },
+  "test": {
+    "start": "2007-05-14T00:00:00",
+    "end": "2007-06-08T08:15:00",
+    "calendar_days": 25.34375
+  },
+  "time_basis": "source_local_naive"
+}

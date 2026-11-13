@@ -1,0 +1,18 @@
+{
+  "train": {
+    "start": "2020-01-01T00:00:00",
+    "end": "2020-01-26T00:00:00",
+    "calendar_days": 25.0
+  },
+  "validation": {
+    "start": "2020-01-26T00:00:00",
+    "end": "2020-01-31T00:00:00",
+    "calendar_days": 5.0
+  },
+  "test": {
+    "start": "2020-01-31T00:00:00",
+    "end": "2020-02-05T00:00:00",
+    "calendar_days": 5.0
+  },
+  "time_basis": "source_local_naive"
+}

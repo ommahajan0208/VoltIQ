@@ -1,0 +1,29 @@
+{
+  "run_id": "run_188c0803092c8577bcc6d5393c81991f",
+  "model_id": "chronos_bolt_tiny",
+  "evaluation_kind": "held_out",
+  "dataset_id": "ds_27f913dfd790465d9cf7120232074fad",
+  "dataset_hash": "4259c9d7ece5dbee9ab8d53682baac68d791c864f0f64a52b4043cb3b90894b7",
+  "model_revision": "a0e552de83495b5c28c14c71c374f3e33280b340",
+  "pretraining_overlap": "unknown",
+  "device": "cpu",
+  "dtype": "float32",
+  "imputed_context_bins": 427,
+  "skip_reasons": {
+    "missing_target": 13,
+    "unresolved_context": 577,
+    "invalid_model_output": 4,
+    "outside_split": 2
+  },
+  "forecast_rows": 13342,
+  "score_rows": 9858,
+  "invalid_model_output_count": 4,
+  "event_rows": 24,
+  "anomaly_status": "calibrated",
+  "split_manifest": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_188c0803092c8577bcc6d5393c81991f\\split_manifest.json",
+  "metrics_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_188c0803092c8577bcc6d5393c81991f\\metrics.json",
+  "thresholds_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_188c0803092c8577bcc6d5393c81991f\\thresholds.json",
+  "forecasts_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_188c0803092c8577bcc6d5393c81991f\\forecasts.parquet",
+  "scores_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_188c0803092c8577bcc6d5393c81991f\\scores.parquet",
+  "events_path": "C:\\Users\\OM MAHAJAN\\Dev_Om\\hackathon\\DL_PBL\\backend\\data\\runs\\run_188c0803092c8577bcc6d5393c81991f\\events.parquet"
+}

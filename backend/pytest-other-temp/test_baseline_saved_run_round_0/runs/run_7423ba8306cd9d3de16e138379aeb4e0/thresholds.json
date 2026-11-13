@@ -1,0 +1,14 @@
+{
+  "residual": {
+    "value": 0.019620938769047802,
+    "unit": "kW",
+    "validation_count": 480,
+    "quantile": 0.99
+  },
+  "slot_mad": {
+    "value": 6.047384815133212e-13,
+    "unit": "robust_sigma",
+    "validation_count": 480,
+    "quantile": 0.99
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "validation_h1": {
+    "eligible_origins": 480,
+    "target_bins": 480,
+    "mae_kw": 0.012500000000000006,
+    "rmse_kw": 0.013881531202489318,
+    "mase": 12040815936527.139,
+    "energy_error_kwh": -4.440892098500626e-16,
+    "pinball": null,
+    "q10_q90_coverage": null,
+    "mean_band_width_kw": null
+  },
+  "validation_h4": {
+    "eligible_origins": 120,
+    "target_bins": 480,
+    "mae_kw": 0.031142888736356393,
+    "rmse_kw": 0.037942916936418665,
+    "mase": 29998863280496.914,
+    "energy_error_kwh": 3.219646771412954e-15,
+    "pinball": null,
+    "q10_q90_coverage": null,
+    "mean_band_width_kw": null
+  },
+  "validation_h16": {
+    "eligible_origins": 30,
+    "target_bins": 480,
+    "mae_kw": 0.10312684203157654,
+    "rmse_kw": 0.13039716385637176,
+    "mase": 99338505841401.84,
+    "energy_error_kwh": -3.674838211509268e-14,
+    "pinball": null,
+    "q10_q90_coverage": null,
+    "mean_band_width_kw": null
+  },
+  "test_h1": {
+    "eligible_origins": 384,
+    "target_bins": 384,
+    "mae_kw": 0.02802411854719365,
+    "rmse_kw": 0.21695694712977479,
+    "mase": 26994660256813.992,
+    "energy_error_kwh": 4.163336342344337e-16,
+    "pinball": null,
+    "q10_q90_coverage": null,
+    "mean_band_width_kw": null
+  },
+  "test_h4": {
+    "eligible_origins": 96,
+    "target_bins": 384,
+    "mae_kw": 0.03895538873635638,
+    "rmse_kw": 0.16061003592534887,
+    "mase": 37524373240826.36,
+    "energy_error_kwh": -0.7500000000000097,
+    "pinball": null,
+    "q10_q90_coverage": null,
+    "mean_band_width_kw": null
+  },
+  "test_h16": {
+    "eligible_origins": 24,
+    "target_bins": 384,
+    "mae_kw": 0.11093934203157578,
+    "rmse_kw": 0.2033699560802509,
+    "mase": 106864015801730.56,
+    "energy_error_kwh": -0.7499999999999784,
+    "pinball": null,
+    "q10_q90_coverage": null,
+    "mean_band_width_kw": null
+  },
+  "timing": {
+    "device": "cpu",
+    "dtype": "float32",
+    "context_bins": 192,
+    "batch_size": 1,
+    "median_ms": 0.009750001481734216,
+    "p95_ms": 0.029935005295556028
+  },
+  "mase_training_pairs": 2016,
+  "invalid_model_outputs": []
+}
