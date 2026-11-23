@@ -1,14 +1,13 @@
 """Processing contract checks; Spark numerical checks run when PySpark is installed."""
 
 import unittest
+import os
 import shutil
+import tempfile
 import uuid
 from pathlib import Path
 
 from backend.app.processing import ProcessingError, inspect_source, process_dataset, validate_mapping
-
-TEST_TEMP_ROOT = Path(__file__).resolve().parent
-
 
 class MappingTests(unittest.TestCase):
     def test_frontend_uci_mapping(self):
@@ -37,15 +36,56 @@ class MappingTests(unittest.TestCase):
             validate_mapping({**base, "active_power_unit": "kW",
                               "timestamp_format": "yyyy-MM-dd HH:mm:ssXXX"})
 
+    def test_requires_explicit_units_for_optional_channels(self):
+        base = {"source_kind": "generic", "timestamp_column": "ts",
+                "timestamp_format": "yyyy-MM-dd HH:mm:ss",
+                "active_power_column": "p", "active_power_unit": "kW"}
+        with self.assertRaisesRegex(ProcessingError, "Explicit unit Wh"):
+            validate_mapping({**base, "optional_channels": {
+                "sub1": {"column": "kitchen", "unit": "kW"}
+            }})
+
+        with self.assertRaisesRegex(ProcessingError, "mapped twice"):
+            validate_mapping({**base, "columns": {
+                "a": "voltage_v", "b": "voltage_v"
+            }, "units": {"voltage_v": "V"}})
+
+    def test_rejects_invalid_generic_shape_and_optional_channel(self):
+        with self.assertRaisesRegex(ProcessingError, "delimiter"):
+            validate_mapping({"source_kind": "generic", "delimiter": "|"})
+        with self.assertRaisesRegex(ProcessingError, "Unsupported optional channel"):
+            validate_mapping({"source_kind": "generic", "timestamp_column": "ts",
+                              "timestamp_format": "yyyy-MM-dd HH:mm:ss",
+                              "active_power_column": "p", "active_power_unit": "kW",
+                              "optional_channels": {"appliance": {"column": "x", "unit": "Wh"}}})
+
     def test_preview_is_bounded(self):
-        folder = TEST_TEMP_ROOT / f"test-{uuid.uuid4().hex}"
-        folder.mkdir()
+        folder = Path(tempfile.mkdtemp(prefix=f"voltiq-preview-{uuid.uuid4().hex}-"))
         try:
             path = folder / "readings.csv"
             path.write_text("ts,p\n" + "\n".join(f"t{i},{i}" for i in range(105)), encoding="utf-8")
             preview = inspect_source(path)
             self.assertEqual(preview["columns"], ["ts", "p"])
             self.assertEqual(len(preview["preview"]), 100)
+        finally:
+            shutil.rmtree(folder)
+
+    def test_preview_rejects_missing_binary_and_duplicate_headers(self):
+        missing = Path(tempfile.mkdtemp(prefix="voltiq-missing-")) / "missing.csv"
+        with self.assertRaisesRegex(ProcessingError, "does not exist"):
+            inspect_source(missing)
+
+        folder = Path(tempfile.mkdtemp(prefix="voltiq-invalid-preview-"))
+        try:
+            duplicate = folder / "duplicate.csv"
+            duplicate.write_text("ts,ts\n2007-01-01,1\n", encoding="utf-8")
+            with self.assertRaisesRegex(ProcessingError, "duplicate column"):
+                inspect_source(duplicate)
+
+            binary = folder / "binary.csv"
+            binary.write_bytes(b"ts,p\n\x00,1\n")
+            with self.assertRaisesRegex(ProcessingError, "Binary data"):
+                inspect_source(binary)
         finally:
             shutil.rmtree(folder)
 
@@ -57,10 +97,11 @@ class SparkNumericalTests(unittest.TestCase):
             import pyspark  # noqa: F401
         except ImportError:
             raise unittest.SkipTest("PySpark is not installed")
+        if not os.environ.get("JAVA_HOME") and shutil.which("java") is None:
+            raise unittest.SkipTest("Java is not installed or JAVA_HOME is not configured")
 
     def test_energy_missingness_and_remainder(self):
-        root = TEST_TEMP_ROOT / f"test-{uuid.uuid4().hex}"
-        root.mkdir()
+        root = Path(tempfile.mkdtemp(prefix=f"voltiq-spark-{uuid.uuid4().hex}-"))
         try:
             source = root / "input.txt"
             header = "Date;Time;Global_active_power;Global_reactive_power;Voltage;Global_intensity;Sub_metering_1;Sub_metering_2;Sub_metering_3"
@@ -91,8 +132,7 @@ class SparkNumericalTests(unittest.TestCase):
             shutil.rmtree(root)
 
     def test_conflicting_duplicates_do_not_publish(self):
-        root = TEST_TEMP_ROOT / f"test-{uuid.uuid4().hex}"
-        root.mkdir()
+        root = Path(tempfile.mkdtemp(prefix=f"voltiq-conflict-{uuid.uuid4().hex}-"))
         try:
             source = root / "input.csv"
             source.write_text("ts,p\n2007-01-01 00:00:00,1\n2007-01-01 00:00:00,2\n", encoding="utf-8")
