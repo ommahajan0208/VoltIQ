@@ -124,7 +124,6 @@ The setup and operational instructions live outside this overview README:
 
 - [QUICKSTART.md](QUICKSTART.md) — shortest path to install dependencies, configure Windows Hadoop, start the app, and run the checks.
 - [instructions.md](instructions.md) — complete setup, dataset registration, Chronos preparation, evaluation, and test commands.
-- [PROGRESS.md](PROGRESS.md) — verification results, acceptance status, and remaining known limits.
 
 ---
 
