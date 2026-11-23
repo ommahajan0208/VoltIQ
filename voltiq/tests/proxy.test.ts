@@ -1,6 +1,6 @@
 import { afterEach, describe, it, expect, vi } from "vitest";
 import { NextRequest } from "next/server";
-import { GET, POST } from "../src/app/api/v1/[...path]/route";
+import { GET, POST, PUT } from "../src/app/api/v1/[...path]/route";
 afterEach(() => {
   vi.unstubAllGlobals();
   vi.unstubAllEnvs();
@@ -36,6 +36,38 @@ describe("local API proxy boundary", () => {
     expect(outgoing.get("X-Application-Token")).toBe("test-launch-token");
     expect(outgoing.get("Idempotency-Key")).toBe("unique-job");
     expect(await response.text()).not.toContain("test-launch-token");
+  });
+  it("forwards backend configuration, query parameters, and mutation bodies", async () => {
+    vi.stubEnv("BACKEND_URL", "http://backend.internal:9000");
+    const upstream = vi.fn().mockResolvedValue(Response.json({ data: {} }));
+    vi.stubGlobal("fetch", upstream);
+    const request = new NextRequest(
+      "http://127.0.0.1:3000/api/v1/jobs/job-1?cursor=next%20page",
+      {
+        method: "PUT",
+        headers: {
+          host: "127.0.0.1:3000",
+          origin: "http://127.0.0.1:3000",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: "cancelled" }),
+      },
+    );
+    const response = await PUT(request, {
+      params: Promise.resolve({ path: ["jobs", "job-1"] }),
+    });
+    expect(response.status).toBe(200);
+    expect(upstream).toHaveBeenCalledOnce();
+    const [url, init] = upstream.mock.calls[0];
+    expect(url).toBe(
+      "http://backend.internal:9000/api/v1/jobs/job-1?cursor=next%20page",
+    );
+    expect((init.headers as Headers).get("content-type")).toBe(
+      "application/json",
+    );
+    expect(await new Response(init.body).text()).toBe(
+      JSON.stringify({ status: "cancelled" }),
+    );
   });
   it("rejects mutation requests from unrelated origins", async () => {
     const upstream = vi.fn();

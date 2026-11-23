@@ -28,4 +28,31 @@ describe("uncertain job submission retries", () => {
       "third-key",
     );
   });
+
+  it("does not reuse a key after the server has returned an API error", async () => {
+    const upstream = vi
+      .fn()
+      .mockResolvedValueOnce(
+        Response.json(
+          { error: { message: "Rejected" } },
+          { status: 422 },
+        ),
+      )
+      .mockResolvedValueOnce(
+        Response.json({
+          data: { job_id: "job" },
+          meta: { schema_version: "2.0", time_basis: "source_local_naive" },
+        }),
+      );
+    vi.stubGlobal("fetch", upstream);
+    const body = { dataset_id: "test-error-dataset" };
+
+    await expect(mutateApi("/runs", body, "POST", "error-key")).rejects.toThrow(
+      /Rejected/,
+    );
+    await mutateApi("/runs", body, "POST", "fresh-key");
+    expect(upstream.mock.calls[1][1].headers["Idempotency-Key"]).toBe(
+      "fresh-key",
+    );
+  });
 });

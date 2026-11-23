@@ -6,7 +6,9 @@ import {
   sourceLabel,
   sourceTimestampLabel,
   inRange,
+  validRange,
   isSourceTimestamp,
+  number,
   csvCell,
 } from "../src/lib/time";
 describe("source wall-clock dates", () => {
@@ -44,6 +46,14 @@ describe("source wall-clock dates", () => {
     expect(isSourceTimestamp("2007-05-01T00:00:00Z")).toBe(false);
     expect(isSourceTimestamp("2007-02-30T00:00:00")).toBe(false);
     expect(isSourceTimestamp("2007-05-01T00:00:00")).toBe(true);
+  });
+  it("validates half-open ranges and formats unavailable or non-finite numbers", () => {
+    expect(validRange("2007-05-01T00:00:00", "2007-05-02T00:00:00")).toBe(true);
+    expect(validRange("2007-05-02T00:00:00", "2007-05-01T00:00:00")).toBe(false);
+    expect(validRange("2007-05-01", "2007-05-02T00:00:00")).toBe(false);
+    expect(number(null)).toBe("Unavailable");
+    expect(number(Number.NaN)).toBe("Unavailable");
+    expect(number(1.234, 2)).toBe("1.23");
   });
   it("steps a historical origin across midnight while preserving source time", () =>
     expect(addSourceMinutes("2007-05-01T00:00:00", -15)).toBe(
